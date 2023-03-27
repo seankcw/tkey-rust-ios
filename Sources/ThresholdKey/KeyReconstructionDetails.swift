@@ -39,8 +39,15 @@ public final class KeyReconstructionDetails: Codable {
                    key_reconstruction_get_seed_phrase_at(pointer, index, error)
                        })
                 guard errorCode == 0 else {
-                    throw RuntimeError("Error in KeyDetails, field Seed Phrase, index " + index.formatted())
-                    }
+                    let indexStr: String = {
+                        if #available(iOS 15.0, *) {
+                            return index.formatted()
+                        } else {
+                            return String(index)
+                        }
+                    }()
+                    throw RuntimeError("Error in KeyDetails, field Seed Phrase, index " + indexStr)
+                }
                 self.seed_phrase.append(String.init(cString: seed_item!))
                 string_free(seed_item)
             }
@@ -59,8 +66,15 @@ public final class KeyReconstructionDetails: Codable {
                    key_reconstruction_get_all_keys_at(pointer, index, error)
                        })
                 guard errorCode == 0 else {
-                    throw RuntimeError("Error in KeyDetails, field Seed Phrase, index " + index.formatted())
-                    }
+                    let indexStr: String = {
+                        if #available(iOS 15.0, *) {
+                            return index.formatted()
+                        } else {
+                            return String(index)
+                        }
+                    }()
+                    throw RuntimeError("Error in KeyDetails, field Seed Phrase, index " + indexStr)
+                }
                 self.all_keys.append(String.init(cString: seed_item!))
                 string_free(seed_item)
             }
