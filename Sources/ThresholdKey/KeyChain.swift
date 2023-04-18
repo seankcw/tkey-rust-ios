@@ -31,9 +31,9 @@ public class KeychainInterface {
 
          if  key_detail.required_shares > 0 {
          // get share from keychain
-             let share = try! readPassword(service: "tkey_ios", account: key_detail.pub_key.getAsCompressedPublicKey(format: "elliptic-compressed"))
-             let shareStore = try! ShareStore(json: String(data: share, encoding: .utf8)!)
-             try! await threshold_key.input_share_store(shareStore: shareStore)
+             let share = try readPassword(service: "tkey_ios", account: key_detail.pub_key.getAsCompressedPublicKey(format: "elliptic-compressed"))
+             let shareStore = try ShareStore(json: String(data: share, encoding: .utf8)!)
+             try await threshold_key.input_share_store(shareStore: shareStore)
 
          } else {
          // save/update keychain
